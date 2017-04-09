@@ -1,51 +1,45 @@
-'use strict';
+/*'use strict';
 
 function willFailBecauseOfGlobalVariable() {
     notAllowedVariable = 123;
-    console.log('This should not show when in strict mode');
 }
 
-willFailBecauseOfGlobalVariable();
+willFailBecauseOfGlobalVariable();*/
 
-/*
-function nonStrictFunction() {
+/*function nonStrictFunction() {
     nonStrictVariable = 123;
-    console.log('This will show as we are not being strict here');
+    console.log('This should be printed as we are not strict');
 }
 
 function strictFunction() {
     'use strict';
-    strictedVariable = 456;
-    console.log('This will never show as we are being strict here');
+    strictVariable = 456;
+    console.log('This should not be printed as we are now strict');
 }
 
 nonStrictFunction();
 strictFunction();*/
 
-/*function nonStrictFunc() {
+/*function nonStrictFunction() {
     console.log(this === global);
 }
 
-function strictFunc() {
+function strictFunction() {
     'use strict';
     console.log(this === undefined);
+    console.log(this);
 }
 
-nonStrictFunc();
-strictFunc();*/
+//nonStrictFunction();
+//strictFunction();
+//var aStrictFunc = new strictFunction();*/
 
-/*
 function Point(x, y) {
     'use strict';
     this.x = x;
     this.y = y;
 }
-*/
 
-/*
-var succeeds = new Point(1, 3);
-console.log(succeeds.x);
-
-var fails = Point(1, 3);
-console.log(fails.x);
-*/
+var aPoint = new Point(1, 2);
+console.log(aPoint.x);
+console.log(aPoint.y);
