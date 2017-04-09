@@ -1,3 +1,5 @@
+'use strict'
+
 // Basic 
 var Person = function(){};
 
@@ -41,33 +43,3 @@ console.log(aCat.speak());
 
 var bCat = Object.create(Cat.prototype);
 console.log(bCat.type);*/
-
-// Property Descriptors
-/*
-var Animal = Object.create({}, {
-    'type': {
-        configurable: false,
-        enumerable: true,
-        value: '',
-        writable: true
-    }, 
-    'hasSpine': {
-        configurable: false,
-        enumerable: true,
-        value: true,
-        writable: false
-    }
-});
-
-Animal.type = 'Cat';
-Animal.hasSpine = false;
-
-console.log(Animal.type);
-console.log(Animal.hasSpine);
-
-for (var prop in Animal) 
-{
-    console.log(prop);
-}
-
-console.log(JSON.stringify(Animal));*/

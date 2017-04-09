@@ -1,6 +1,34 @@
 'use strict';
 
-var Animal = function() {}
+var Animal = Object.create({}, {
+    'type': {
+        configurable: false,
+        enumerable: true,
+        value: '',
+        writable: true
+    }, 
+    'hasSpine': {
+        configurable: false,
+        enumerable: true,
+        value: true,
+        writable: false
+    }
+});
+
+Animal.type = 'Cat';
+//Animal.hasSpine = false;
+
+console.log(Animal.type);
+console.log(Animal.hasSpine);
+
+for (var prop in Animal) 
+{
+    console.log(prop);
+}
+
+console.log(JSON.stringify(Animal));
+
+/*var Animal = function() {}
 
 Object.defineProperties(Animal, {
     'type': {
@@ -28,4 +56,4 @@ console.log(Animal.type);
 
 var descriptor = Object.getOwnPropertyDescriptor(Animal, 'type');
 
-console.log(JSON.stringify(descriptor));
+console.log(JSON.stringify(descriptor));*/
