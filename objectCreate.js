@@ -1,77 +1,135 @@
-'use strict'
+'use strict';
 
-// Basic 
-var Person = function(){};
-
-Person.prototype.speak = function() {
-    console.log('I am awesome');
-};
-
-var me = Object.create(Person.prototype);
-console.log(me.speak());
-
-var you = Object.create(Person.prototype);
-console.log(you.speak());
-
-console.log(me instanceof Person);
-console.log(me instanceof Object);
-console.log(Person.prototype.isPrototypeOf(me));
-console.log(Object.prototype.isPrototypeOf(me));
-
-// Inheritance 
 /*var Animal = function() {
-    this.type = "";
+    this.type = '';
     this.hasSpine = true;
 };
 
-Animal.prototype.move = function() {
-    var moveMessage = this.type ? this.type + " is moving" : "moving";
-    console.log(moveMessage);
+Animal.prototype.speak = function() {
+    var message = this.type ? this.type + ' is speaking' : 'speaking';
+    console.log(message);
 };
 
 var Cat = function() {
-    Animal.call(this);  
-    this.type = "Cat";
+    Animal.call(this);
+    this.type = 'Cat';
 };
 
-Cat.prototype = Object.create(Animal.prototype);
-Cat.prototype.constructor = Animal;
+Cat.prototype = new Animal();
+Cat.prototype.scratch = function() {
+    console.log('Scratching');
+};
 
-Cat.prototype.speak = function() {
-    console.log('Meow');
+var Dog = function() {
+    Animal.call(this);
+    this.type = 'Dog';
+}
+
+Dog.prototype = new Animal();
+Dog.prototype.wagTail = function() {
+    console.log('Wagging tail');
 };
 
 var aCat = new Cat();
-console.log(aCat.move());
-console.log(aCat.type);
-console.log(aCat.speak());
+aCat.speak();
+aCat.scratch();
+//aCat.wagTail();
 
-var bCat = Object.create(Cat.prototype);
-console.log(bCat.type);
+var aDog = new Dog();
+aDog.speak();
+//aDog.scratch();
+aDog.wagTail();
 
-console.log(aCat instanceof Cat);
-console.log(aCat instanceof Object);
-console.log(Cat.prototype.isPrototypeOf(aCat));
-console.log(Object.prototype.isPrototypeOf(aCat));
-console.log(bCat instanceof Cat);
-console.log(bCat instanceof Object);
-console.log(Cat.prototype.isPrototypeOf(bCat));
-console.log(Object.prototype.isPrototypeOf(bCat));
-*/
+aDog.wagTail = function() { console.log('Der alright'); }
+aDog.wagTail();*/
 
 /*
 var Animal = {
     type: '',
-    hasSpine: true
+    hasSpine: true,
+    speak: function() {
+        var message = this.type ? this.type + ' is speaking' : 'speaking';
+        console.log(message);
+    }
 };
 
+var Cat = {
+    type: 'Cat',
+    scratch: function() {
+        console.log('Scratching');
+    }
+};
+
+var Dog = {
+    type: 'Dog',
+    wagTail: function() {
+        console.log('Wagging tail');
+    }
+};
+
+var aCat = mergeTypes(Cat, Animal);
+var aDog = mergeTypes(Dog, Animal);
+
+console.log(aCat.type);
+console.log(aCat.hasSpine);
+aCat.speak();
+aCat.scratch();
+//aCat.wagTail();
+
+console.log(aDog.type);
+console.log(aDog.hasSpine);
+aDog.speak();
+//aDog.scratch();
+aDog.wagTail();
+
+function mergeTypes() {
+  var returnObject = {}
+  
+  for (var i = arguments.length-1; i>=0; i--) {
+    var argObj = arguments[i];
+    
+    for (var propName in argObj) {
+        returnObject[propName] = argObj[propName]
+    } 
+  }
+  
+  return returnObject
+}*/
+
+var Animal = Object.create({}, {
+    'type': { value: ''},
+    'hasSpine': { value: true },
+    'speak': { value: function() {
+        var message = this.type ? this.type + ' is speaking' : 'speaking';
+        console.log(message);
+    }}
+});
+
 var Cat = Object.create(Animal, {
-    'type': { value: 'Cat' }
+    'type': { value: 'Cat' },
+    'scratch': { value: function() {
+        console.log('Scratching');
+    }}
+});
+
+var Dog = Object.create(Animal, {
+    'type': { value: 'Dog' },
+    'wagTail': { value: function() {
+        console.log('Wagging tail');
+    }}
 });
 
 var aCat = Object.create(Cat);
+var aDog = Object.create(Dog);
+
 console.log(aCat.type);
 console.log(aCat.hasSpine);
+aCat.speak();
+aCat.scratch();
+//aCat.wagTail();
 
-//console.log(aCat instanceof Cat);
-console.log(aCat.isPrototypeOf(Cat));*/
+console.log(aDog.type);
+console.log(aDog.hasSpine);
+aDog.speak();
+//aDog.scratch();
+aDog.wagTail();
