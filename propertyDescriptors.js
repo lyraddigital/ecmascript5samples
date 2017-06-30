@@ -2,58 +2,30 @@
 
 var Animal = Object.create({}, {
     'type': {
-        configurable: false,
-        enumerable: true,
-        value: '',
-        writable: true
-    }, 
-    'hasSpine': {
-        configurable: false,
-        enumerable: true,
-        value: true,
-        writable: false
+        enumerable: false,
+        //value: '',
+        //writable: false,
+        configurable: true,
+        get: function() {
+            return 'Idiot';
+        },
+        set: function(value) {
+            console.log('Setting type to ' + value);
+        }
     }
 });
 
-Animal.type = 'Cat';
-//Animal.hasSpine = false;
+Object.defineProperties(Animal, {
+    'type': { value: 'Chicken' },
+    'hasSpine': { value: true, writable: true }
+});
 
 console.log(Animal.type);
 console.log(Animal.hasSpine);
 
-for (var prop in Animal) 
-{
-    console.log(prop);
-}
+Animal.hasSpine = false;
 
-console.log(JSON.stringify(Animal));
+console.log(Animal.hasSpine);
+console.log(Object.getOwnPropertyDescriptor(Animal, 'hasSpine'));
 
-/*var Animal = function() {}
-
-Object.defineProperties(Animal, {
-    'type': {
-        configurable: true,
-        enumerable: false,
-        //value: '',
-        //get: function() { return 'Animal' }//,
-        //set: function(value) { console.log('You can not set the type'); },
-        writable: true
-    }
-});
-
-Animal.type = 'Cat';
-
-console.log(Animal.type);
-
-Object.defineProperty(Animal, 'type', {
-    value: 'Animal2'
-});
-
-console.log(Animal.type);
-Animal.type = "Dog";
-
-console.log(Animal.type);
-
-var descriptor = Object.getOwnPropertyDescriptor(Animal, 'type');
-
-console.log(JSON.stringify(descriptor));*/
+//Object.defineProperty(Animal, 'type', { value: 'Egg'});
